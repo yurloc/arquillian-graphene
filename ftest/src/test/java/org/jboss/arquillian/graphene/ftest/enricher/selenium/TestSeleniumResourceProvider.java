@@ -22,6 +22,7 @@
 package org.jboss.arquillian.graphene.ftest.enricher.selenium;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.net.URL;
 
@@ -39,6 +40,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.html5.BrowserConnection;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.Mouse;
 import org.openqa.selenium.internal.Locatable;
@@ -68,6 +70,11 @@ public class TestSeleniumResourceProvider {
     @Before
     public void loadPage() {
         Resource.inCurrentPackage().find("selenium-provider.html").loadPage(browser, contextRoot);
+    }
+
+    @Test
+    public void testBrowserConnection(@ArquillianResource BrowserConnection connection) {
+        assertTrue(connection.isOnline());
     }
 
     @Test
